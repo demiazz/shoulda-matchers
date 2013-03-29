@@ -106,7 +106,7 @@ module Shoulda # :nodoc:
 
         def ensure_nil_record_in_database
           unless existing_record_is_nil?
-            create_record_in_database(nil)
+            create_record_in_database(nil_value: true)
           end
         end
 
@@ -114,7 +114,13 @@ module Shoulda # :nodoc:
           @existing_record.present? && existing_value.nil?
         end
 
-        def create_record_in_database(value = "arbitrary_string")
+        def create_record_in_database(options = {})
+          if options[:nil_value]
+            value = nil
+          else
+            value = "arbitrary_string"
+          end
+
           @subject.class.new.tap do |instance|
             instance.send("#{@attribute}=", value)
             instance.save(:validate => false)

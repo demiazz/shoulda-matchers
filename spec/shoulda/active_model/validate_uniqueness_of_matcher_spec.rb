@@ -169,6 +169,7 @@ describe Shoulda::Matchers::ActiveModel::ValidateUniquenessOfMatcher do
 
     it "should create a nil and verify that it is allowed" do
       @model.should validate_uniqueness_of(:attr).allow_nil
+      Example.all.any?{ |instance| instance.attr.nil? }
     end
   end
 
