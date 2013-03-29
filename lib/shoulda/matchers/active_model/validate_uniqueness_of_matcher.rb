@@ -72,7 +72,7 @@ module Shoulda # :nodoc:
           @subject = subject.class.new
           @expected_message ||= :taken
           set_scoped_attributes &&
-            validate_attribute? &&
+            validate_everything_expect_duplicate_nils? &&
             validate_after_scope_change? &&
             allows_nil?
         end
@@ -138,7 +138,7 @@ module Shoulda # :nodoc:
           end
         end
 
-        def validate_attribute?
+        def validate_everything_expect_duplicate_nils?
           if @options[:allow_nil] && existing_value.nil?
             create_record_without_nil
           end
