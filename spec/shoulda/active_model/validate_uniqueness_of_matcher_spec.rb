@@ -30,7 +30,7 @@ describe Shoulda::Matchers::ActiveModel::ValidateUniquenessOfMatcher do
 
     context "without an existing value" do
       before do
-        Example.find(:first).should be_nil
+        Example.first.should be_nil
         @matcher = validate_uniqueness_of(:attr)
       end
 
